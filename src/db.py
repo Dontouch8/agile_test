@@ -26,16 +26,22 @@ def create_images_table():
     cursor = conn.cursor()
 
     create_table = """
-    CREATE TABLE IF NOT EXISTS images (
-    image_id TEXT PRIMARY KEY, author text, camera text, tags text,
-    cropped_picture text, full_picture text)
+    CREATE TABLE IF NOT EXISTS images
+        (
+            image_id        TEXT PRIMARY KEY,
+            author          TEXT,
+            camera          TEXT,
+            tags            TEXT,
+            cropped_picture TEXT,
+            full_picture    TEXT
+        )
     """
     cursor.execute(create_table)
     conn.commit()
     conn.close()
 
 
-def get_images_from_db(params: Dict[str, Optional[str]]):
+def get_images_from_db(params: Dict[str, Optional[str]]) -> list:
     conn = get_conn()
     cursor = get_cursor(conn)
     for k in list(params.keys()):
@@ -46,7 +52,6 @@ def get_images_from_db(params: Dict[str, Optional[str]]):
     where_query = ""
     for key in params.keys():
         where_query += f"{key}=? AND "
-    print(params.values())
     where_query = where_query.rstrip("AND ")
     query = f"SELECT * FROM images WHERE {where_query}"
     cursor.execute(query, tuple(params.values()))

@@ -3,15 +3,11 @@ import sqlite3
 
 import requests
 
-from config import logger
+from config import API_KEY, API_URL, HEADERS, logger
 from db import create_images_table, get_conn, get_cursor
 
-API_KEY = "23567b218376f79d9415"
-API_URL = "http://interview.agileengine.com"
-HEADERS = {"Content-Type": "application/json", "user-agent": "PostmanRuntime/7.26.8"}
 
-
-def request(page: int, token: int) -> dict:
+def get_page_of_images(page: int, token: int) -> dict:
     """
     Request to get list of images from
      /images endpoint with pagination.
@@ -59,14 +55,14 @@ def get_images():
     if token.get("status") == "error":
         return {"status": "error", "message": token.get("message")}
     page = 1
-    first_page_response = request(page, token["data"])
+    first_page_response = get_page_of_images(page, token["data"])
     if first_page_response.get("status") == "error":
         return {"status": "error", "message": first_page_response.get("message")}
     results = []
     results.extend(first_page_response["pictures"])
     total_pages = first_page_response["pageCount"]
     while page < total_pages:
-        response = request(page + 1, token["data"])
+        response = get_page_of_images(page + 1, token["data"])
         if response.get("status") == "error":
             return {"status": "error", "message": response.get("message")}
         results.extend(response["pictures"])
