@@ -4,7 +4,7 @@
 
 ```sh
 # Clone repo
-git clone https://github.com/webscribble/scraping-platform && cd scraping-platform
+git clone https://github.com/Dontouch8/agile_test && cd agile
 
 # Create python3.6 virtual environment
 python3.6 -m venv venv
