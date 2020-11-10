@@ -1,0 +1,16 @@
+# Tmp
+*.swp
+*.swo
+*.pyc
+
+# Logs
+*.log
+
+# Virtual environment
+venv/
+
+# Configs
+.vscode/
+
+# DB files
+*.db

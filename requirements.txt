@@ -1,0 +1,7 @@
+black
+fastapi
+loguru
+pydantic
+requests
+schedule
+uvicorn
