@@ -20,10 +20,11 @@ pip install -r requirements.txt
 
 ```sh
 # Start web server
-uvicorn src.main:app --reload
+cd src
+uvicorn main:app --reload
 
 # Start scheduler
-python src/scheduler.py
+python scheduler.py
 ```
 
 # Testing
